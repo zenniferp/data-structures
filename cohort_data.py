@@ -53,10 +53,12 @@ def students_by_cohort(filename, cohort='All'):
 
     students = []
 
-    # TODO: replace this with your code
-
+    for row in open(filename):
+      row_list = row.rstrip().split("|")
+      first, last, house, advisor, cohort = row_list
+      if cohort not in ("I", "G") and cohort in ("All", cohort): #include All bc we need to cover in case the function called the default value
+        students.append(first + " " +last)
     return sorted(students)
-
 
 def all_names_by_house(filename):
     """Return a list that contains rosters for all houses, ghosts, instructors.
