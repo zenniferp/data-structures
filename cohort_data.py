@@ -16,11 +16,12 @@ def all_houses(filename):
     """
 
     houses = set()
-
-    # TODO: replace this with your code
-
+    
+    for row in open(filename): #check previous exercise for hint about opening a file
+      row_list = row.rstrip().split("|")
+      if row_list[2]: #or if row_list[2] == True
+        houses.add(row_list[2]) 
     return houses
-
 
 def students_by_cohort(filename, cohort='All'):
     """Return a list of students' full names by cohort.
