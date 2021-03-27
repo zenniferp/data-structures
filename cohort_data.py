@@ -55,10 +55,10 @@ def students_by_cohort(filename, cohort='All'):
 
     for row in open(filename):
       row_list = row.rstrip().split("|")
-      first, last, house, advisor, cohort = row_list
-      if cohort not in ("I", "G") and cohort in ("All", cohort): #include All bc we need to cover in case the function called the default value
+      first, last, house, advisor, cohort_name = row_list
+      if cohort_name not in ("I", "G") and cohort in ("All", cohort_name): #include All bc we need to cover in case the function called the default value
         students.append(first + " " +last)
-    return sorted(students)
+    return sorted(students) #return alphabetical full name
 
 def all_names_by_house(filename):
     """Return a list that contains rosters for all houses, ghosts, instructors.
@@ -98,12 +98,27 @@ def all_names_by_house(filename):
     slytherin = []
     ghosts = []
     instructors = []
-
-    # TODO: replace this with your code
-
-    return []
-
-
+    
+    for row in open(filename):
+      row_list = row.rstrip().split("|")
+      first, last, house, advisor, cohort = row_list
+      if house == 'Gryffindor':
+        gryffindor.append(first + " " + last)
+      elif house == "Dumbledore's Army":
+        dumbledores_army.append(first + " " + last)
+      elif house == "Hufflepuff":
+        hufflepuff.append(first + " " + last)
+      elif house == "Ravenclaw":
+        ravenclaw.append(first + " " + last)
+      elif house == "Slytherin":
+        slytherin.append(first + " " + last)
+      elif cohort == "G":
+        ghosts.append(first + " " + last)
+      elif cohort == "I":
+        instructors.append(first + " " + last)
+    mega_list = [sorted(dumbledores_army), sorted(gryffindor), sorted(hufflepuff), sorted(ravenclaw), sorted(slytherin), sorted(ghosts), sorted(instructors)] #if no bracket, you will create 1 new list with all the items from each list, but we want 1 list with 7 lists so you need the brackets
+    return mega_list
+  
 def all_data(filename):
     """Return all the data in a file.
 
@@ -125,8 +140,11 @@ def all_data(filename):
 
     all_data = []
 
-    # TODO: replace this with your code
-
+    for row in open(filename):
+      first, last, house, advisor, cohort_name = row.rstrip().split("|")
+      full_name = first + " " + last
+      indiv_tuple = (full_name, house, advisor, cohort_name)
+      all_data.append(indiv_tuple)
     return all_data
 
 
