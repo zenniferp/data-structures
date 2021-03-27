@@ -169,8 +169,11 @@ def get_cohort_for(filename, name):
       - str: the person's cohort or None
     """
 
-    # TODO: replace this with your code
-
+    for row in open(filename):
+      first, last, house, advisor, cohort_name = row.rstrip().split("|")
+      full_name = first + " " + last
+      if name == full_name:
+        return cohort_name
 
 def find_duped_last_names(filename):
     """Return a set of duplicated last names that exist in the data.
@@ -185,8 +188,14 @@ def find_duped_last_names(filename):
     Return:
       - set[str]: a set of strings
     """
-
-    # TODO: replace this with your code
+    last_names = set()
+    dupe_set = set()
+    for row in open(filename):
+      first, last, house, advisor, cohort_name = row.rstrip().split("|")
+      if last in last_names:
+        dupe_set.add(last)
+      last_names.add(last)
+    return dupe_set
 
 
 def get_housemates_for(filename, name):
@@ -200,8 +209,9 @@ def get_housemates_for(filename, name):
     >>> get_housemates_for('cohort_data.txt', 'Hermione Granger')
     {'Angelina Johnson', ..., 'Seamus Finnigan'}
     """
+    for full_name, house, advisor, cohort_name in all_data(filename):
+       if house == ""
 
-    # TODO: replace this with your code
 
 
 ##############################################################################
